@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Babet</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+    <script type="text/javascript" language="javascript" src="https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <script src="main.js?v=ecosingv811"></script>
+
+</head>
+<style type="text/css">
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=tel] {
+  -moz-appearance:textfield;
+}
+
+
+.couponRow{background-color:#f4f9f9;font-size:0;font-family:roboto,sans-serif;padding-top:8px;padding-bottom:6px;border-bottom:1px solid #ccdce2;padding-right:5px;position:relative}
+.couponRow .bet-code,.couponRow .properties .playBtn{font-family:roboto-condensed,sans-serif}
+.couponRow:last-child{border-bottom:0}
+.couponRow>div{display:inline-block;vertical-align:top}
+.couponRow .bet-code{color:#1F4E56;font-size:11px;display:block;margin-bottom:4px;padding:0 5px}
+.couponRow .bet-code span{margin-left:2px}
+.couponRow .disabledEvent{display:none;font-size:11px;font-weight:400;text-align:center;color:#fff;position:absolute;left:0;right:0;top:0;bottom:0;background-color:rgba(0,0,0,.7);z-index:1}
+.couponRow .disabledEvent span{top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);position:absolute;left:0;right:0}
+.couponRow.disabled .disabledEvent{display:block}
+.couponRow .eventName{margin-left:3px;overflow:hidden;margin-bottom:6px;display:inline-block;font-size:13px;line-height:15px;font-weight:700;vertical-align:middle;color:#1F4E56;max-width:calc(100% - 69px)}
+.couponRow .eventName.clickable{cursor:pointer}
+.couponRow .eventCancelBtn{display:inline-block;vertical-align:top;width:16px;height:14px;text-align:center;line-height:16px;position:relative;z-index:2;float:right}
+.couponRow .eventCancelBtn i{margin-right:0;font-size:12px;color:#cacaca;top:2px;cursor:pointer}
+.couponRow .eventCancelBtn i.ni-times-circle{display:none;color:rgba(0,0,0,.2);font-size:18px}
+.couponRow .properties{float:right}
+.couponRow .properties i{margin-right:0}
+.couponRow .properties .playBtn{font-size:11px;font-weight:700;line-height:1.09;color:#bb1818;width:34px;display:inline-block;vertical-align:middle;margin-right:3px;text-align:left;cursor:pointer}
+.couponRow .properties .watchBtn{width:33px;height:16px;background:url(//sc.nesine.com/10729630026/www/assets/images/bultein/m-watch-btn.svg) no-repeat;display:inline-block;vertical-align:middle;cursor:pointer}
+.couponRow .properties .ni-broadcast,.couponRow .properties .ni-broadcast-tv{color:#8ab7bc;float:none;vertical-align:middle}
+.couponRow .eventCode,.couponRow .eventDate,.couponRow .eventScore{font-family:roboto-condensed,sans-serif;color:#28616b;font-size:11px;line-height:12px;margin-bottom:7px}
+.couponRow .eventCode,.couponRow .eventIcon,.couponRow .eventMBS{width:35px;text-align:center}
+.couponRow .eventIcon{height:16px;background-size:16px;position:relative;top:-1px}
+.couponRow .eventOutcome,.couponRow .eventType span{height:18px;font-size:11px;line-height:19px;vertical-align:top;font-weight:700}
+.couponRow .eventScore{float:right;color:#204e57}
+.couponRow .eventScore strong{font-family:roboto,sans-serif}
+.couponRow .eventCode{letter-spacing:-.5px}
+.couponRow .eventDate{margin-bottom:7px}
+.couponRow .eventDate.playLiveBtn{cursor:pointer;color:#bb1818;font-weight:700}
+.couponRow .eventType{display:inline-block;vertical-align:top;margin-right:3px}
+.couponRow .eventType span{text-align:center;display:inline-block}
+.couponRow .eventType span.type{width:120px;border-radius:2px;background-color:#e9e9e9;color:#313131;margin-right:2px}
+.couponRow .eventType span.choice{width:44px;border-radius:3px;background-color:#46666C;color:#fff;cursor:pointer}
+.couponRow .eventType span.choice.noneClick{cursor:default}
+.couponRow .eventType span.choice.disabled{background-color:#535353;cursor:default}
+.couponRow .eventType span.choice.selected{background-color:#fc0;color:#000}
+.couponRow .specialBet{width:169px;border-radius:4px;background-color:#46666C;font-size:11px;font-weight:700;text-align:center;color:#fff;padding:5px 3px;margin-right:3px;cursor:pointer}
+.couponRow .specialBet.noneClick{cursor:default}
+.couponRow .specialBet.disabled{background-color:#535353;cursor:default}
+.couponRow .specialBet span{display:block}
+.couponRow .specialBet.selected{background-color:#fc0;color:#000}
+.couponRow .eventOutcome{width:40px;display:inline-block;text-align:right;padding-right:4px;color:#313131;position:relative}
+.couponRow .eventOutcome.up{background-color:#beffa6}
+.couponRow .eventOutcome.up:before{top:0;background-color:#289701}
+.couponRow .eventOutcome.down{background-color:#ffb8b7}
+.couponRow .eventOutcome.down:before{bottom:0;background-color:#bb1818}
+.couponRow .eventOutcome.down.anim,.couponRow .eventOutcome.down.anim:before,.couponRow .eventOutcome.up.anim,.couponRow .eventOutcome.up.anim:before{-webkit-animation:coupon-odd-change .4s 3;animation:coupon-odd-change .4s 3}
+.couponRow .eventOutcome.down:before,.couponRow .eventOutcome.up:before{content:'';position:absolute;left:0;z-index:1;width:100%;height:1px}
+.ppc-progress,.ppc-progress .ppc-progress-fill{left:calc(50% - 22px);top:calc(50% - 22px);width:44px;height:44px}
+.couponRow .eventOutcome.downIcon{position:relative}
+.couponRow .eventOutcome.downIcon:after{content:'\e91e';position:absolute;color:#E20000;font-size:12px;right:-9px;top:0;font-family:nesine}
+.couponRow .eventOutcome.upIcon{position:relative}
+.couponRow .eventOutcome.upIcon:after{content:'\e91d';position:absolute;color:#2BBB0F;font-size:12px;right:-9px;top:-1px;font-family:nesine}
+.couponRow .eventOutcome .ni-lock{display:none;font-size:9px;text-align:right;margin-right:1px;margin-bottom:2px}
+.couponRow .percentage{width:46px;text-align:left;font-size:12px;color:#47899d}
+.couponRow .percentage.highest{color:#14892C}
+.couponRow .status{float:right}
+.couponRow .status i{width:100%;height:18px;line-height:19px;margin:0;text-align:right;font-size:14px}
+.couponRow .status i.ni-ban,.couponRow .status i.ni-thumbs-down,.couponRow .status i.ni-times{color:#bb1818}
+.couponRow .status i.ni-check,.couponRow .status i.ni-thumbs-up{color:#289701}
+.couponRow.live .eventDate{font-weight:700;color:#bb1818;font-size:12px}
+.couponRow .multipleChoice.statusWin .eventDate,.couponRow .multipleChoice.statusWin .eventScore,.couponRow .multipleChoice.statusWin .status i,.couponRow.statusWin .eventDate,.couponRow.statusWin .eventScore,.couponRow.statusWin .status i{color:#14892C!important}
+.couponRow .multipleChoice.statusLose .eventDate,.couponRow .multipleChoice.statusLose .eventScore,.couponRow .multipleChoice.statusLose .status i,.couponRow.statusLose .eventDate,.couponRow.statusLose .eventScore,.couponRow.statusLose .status i{color:#bb1818!important}
+.couponRow .multipleChoice{display:block;margin-top:10px}
+.couponRow .multipleChoice>div{display:inline-block;vertical-align:top}
+.couponRow .multipleChoice .score{width:100%}
+.couponRow.outer{padding-right:0;background-color:#FFF}
+.couponRow.outer .eventName{font-size:12px}
+.couponRow.outer .eventType span.type{width:104px}
+.couponRow.outer .eventType span.choice{width:42px}
+.couponRow.outer .specialBet{width:148px}
+.couponRow.outer.lock .eventOutcome{color:#a0a0a0;border:0;font-size:10px;line-height:6px}
+.couponRow.outer.lock .eventOutcome .ni-lock{display:block}
+.couponRow.outer.lock .eventType .choice,.couponRow.outer.lock .specialBet{opacity:.5}
+.betCoupon {margin-top:5px;}
+.betCoupon .couponTop{background-color:#343A40;color:#FFF;padding:0 10px 0 6px;height:40px;font-size:0}
+.betCoupon .couponTop span{display:inline-block;vertical-align:middle}
+.betCoupon .couponTop .couponTitle{font-size:15px;font-weight:700;line-height:40px;width:calc(100% - 21px)}
+.betCoupon .couponTop .numberOfEvents{width:21px;height:20px;font-family:roboto-condensed,sans-serif;font-size:13px;font-weight:700;text-align:center;color:#153238;background-color:#fc0;border-radius:50%}
+.betCoupon .couponContainer{background-color:#343A40;position:relative;  border-left: 6px solid #343A40;  border-right: 6px solid #343A40; border-bottom: 6px solid #343A40;border-bottom-left-radius:4px;border-bottom-right-radius:4px;}
+.betCoupon .couponContainer.white{background-color:#fff}
+.betCoupon .couponContainer .nullCoupon{width:100%;display:inline-block;padding-top:70px;background-color:#fff;text-align:center;height:320px;}
+.betCoupon .couponContainer .nullCoupon i.ni-iddaa{font-size:46px;color:#c0cbce;display:block;margin:0 auto 15px}
+.betCoupon .couponContainer .nullCoupon p{font-family:roboto,sans-serif;font-weight:700;line-height:18px;color:#4e6c76;font-size:14px;margin:0;padding:0 10px}
+.betCoupon .couponContainer .nullCoupon p.small{font-size:11px}
+.betCoupon .couponContainer .nullCoupon .info{font-size:10px;color:#4e6c76;text-align:left;margin-top:50px}
+.betCoupon .couponContainer .nullCoupon .info ul{padding-left:25px}
+.betCoupon .couponContainer .nullCoupon .info ul li{margin-bottom:5px}
+.betCoupon .couponContainer .nullCoupon .info p{font-family:roboto-condensed,sans-serif;font-size:10px;line-height:14px;font-weight:400;padding-right:0}
+.betCoupon .couponContainer .nullCoupon .info p a{color:#4e6c76;text-decoration:underline}
+.betCoupon .couponContainer .nullCoupon .mobileContent{font-family:roboto,sans-serif;display:table;height:calc(100vh - 90px);width:100%}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner{display:table-cell;vertical-align:middle}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner i{font-size:40px;margin:0 0 15px}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner p{font-size:14px;line-height:18px;margin-bottom:30px;font-weight:700}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner a.btn{width:95%;padding:8px 0;font-size:13px;font-weight:700;text-align:center;color:#fff;background-color:#14892C}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner .info{margin-top:30px;font-size:12px;padding-left:5px}
+.betCoupon .couponContainer .nullCoupon .mobileContent .inner .info p{font-family:roboto,sans-serif;font-weight:400;font-size:12px;color:#4e6c76;margin-bottom:0}
+.betCoupon .couponContainer .eventsContainer{background-color:#c0cbce;max-height:450px;overflow-y:auto;position:relative}
+.betCoupon .couponContainer .eventsContainer .couponRow .eventType .choice{cursor:default}
+
+.betCoupon .couponFooter{margin-bottom:0px;width:100%;padding:0;font-family:roboto-condensed,sans-serif;background-color:#343A40;position:relative!important;border-bottom-right-radius:3px;border-bottom-left-radius:3px}
+.betCoupon .couponFooter .closeKeypad{width:34px;height:32px;border-top-left-radius:4px;border-top-right-radius:4px;background-color:#28616b;position:absolute;left:5px;top:-32px;text-align:center;padding-top:6px}
+.betCoupon .couponFooter .closeKeypad i{color:#FFF;font-size:22px;margin-right:0}
+.betCoupon .couponFooter .koh-changed.animate span{-webkit-animation:ni-flash-slow 1.5s 3;animation:ni-flash-slow 1.5s 3}
+.betCoupon .couponFooter .koh-changed+.tooltip.in{opacity:1}
+.betCoupon .couponFooter .sysContainer{background-color:#474f56;width:100%;display:table;overflow:hidden}
+.betCoupon .couponFooter .sysContainer .sysTop{width:54px;padding-left:4px;color:#fff;font-size:12px;display:table-cell;vertical-align:middle}
+.betCoupon .couponFooter .sysContainer .sysTop .sysTitle{margin:0;}
+.betCoupon .couponFooter .sysContainer .sysTop .sysCount{font-family:roboto,sans-serif;font-weight:700;color:#ffeb87;margin:0}
+.betCoupon .couponFooter .sysContainer .sysCenter{float:right;}
+.betCoupon .couponFooter .liveWarning{display:none;width:100%;color:#c90708;font-size:8pt;line-height:16px!important;padding:5px;text-align:left}
+.betCoupon .couponFooter .detailRow .right,.betCoupon .couponFooter .stretch .right{text-align:right}
+.betCoupon .couponFooter .caption{font-size:12px;line-height:.92;color:#FFFFFF;margin-bottom:5px}
+.betCoupon .couponFooter .bold{font-size:14px;font-weight:700;font-style:normal;font-stretch:condensed;line-height:1.72;letter-spacing:normal;color:#FFFFFF}
+.betCoupon .couponFooter .stretch .left{float:left;width:81px}
+.betCoupon .couponFooter select.form-control{-moz-appearance:none;appearance:none;-webkit-appearance:none;padding-right:22px;text-align-last:right;padding-left:7px}
+.betCoupon .couponFooter select.form-control::-ms-expand{display:none}
+.betCoupon .couponFooter option{direction:ltr}
+.betCoupon .couponFooter .coupon-multiply{border-color:#d4d4d4;border-right:0;border-top-right-radius:0!important;border-bottom-right-radius:0!important;padding-right:2px;background-color:#FFF}
+.betCoupon .couponFooter .coupon-multiply::-webkit-inner-spin-button,.betCoupon .couponFooter .coupon-multiply::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.betCoupon .couponFooter .coupon-multiply+span{width:22px;height:24px;font-size:14px;font-weight:700;color:#000;padding:0;line-height:22px}
+.betCoupon .couponFooter .coupon-multiply:focus+span{color:#2ca3b7;border-color:#2ca3b7}
+.betCoupon .couponFooter .coupon-multiply,.betCoupon .couponFooter select.form-control{height:24px;border-radius:4px;text-align:right;margin-left:auto;font-size:14px;font-family:roboto,sans-serif;color:#000;font-weight:700;padding-top:0;padding-bottom:0;line-height:22px}
+.betCoupon .couponFooter .coupon-multiply:focus,.betCoupon .couponFooter select.form-control:focus{color:#2ca3b7;border-color:#2ca3b7}
+.betCoupon .couponFooter .coupon-multiply:focus option,.betCoupon .couponFooter select.form-control:focus option{color:#000}
+.betCoupon .couponFooter .detailRow{border-bottom:1px solid #ced6d9;padding:0 5px}
+.betCoupon .couponFooter .detailRow .left{float:left;width:81px;border-right:1px solid #ced6d9;margin-right:5px}
+.betCoupon .couponFooter .detailRow .left,.betCoupon .couponFooter .detailRow .right{padding-top:10px;padding-bottom:5px}
+.betCoupon .couponFooter .detailRow .coupon-multiply-select select.form-control{width:119px}
+.betCoupon .couponFooter .detailRow .coupon-multiply-select select:-moz-focusring{color:transparent;text-shadow:0 0 0 #000}
+.betCoupon .couponFooter .detailRow.mgain,.betCoupon .couponFooter .detailRow.totalGainRow{border:0;margin-top:2px;}
+.betCoupon .couponFooter .detailRow.mgain .left,.betCoupon .couponFooter .detailRow.mgain .right,.betCoupon .couponFooter .detailRow.totalGainRow .left,.betCoupon .couponFooter .detailRow.totalGainRow .right{padding:0;border:0}
+.betCoupon .couponFooter .detailRow.mgain .caption,.betCoupon .couponFooter .detailRow.totalGainRow .caption{line-height:24px;margin-bottom:0}
+.betCoupon .couponFooter .detailRow.mgain b,.betCoupon .couponFooter .detailRow.totalGainRow b{font-size:18px;font-weight:700;line-height:24px;color:#2ca3b7}
+.betCoupon .couponFooter .minmaxgain{display:inline-block;width:100%;float:left}
+.betCoupon .couponFooter .infoIcon i.ni{font-size:19px;cursor:pointer;margin:0 0 0 7px}
+
+
+.dtr-details li {
+    margin-left:2px;
+    display:table-row;
+   }
+
+
+.macsayisi {
+    width: 21px;
+    height: 20px;
+    font-family: roboto-condensed,sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    color: #153238;
+    background-color: #fc0;
+    border-radius: 50%;
+   }
+
+
+.kupon {
+table-layout: fixed;
+}
+
+.redClass {
+    background-color: #dc3545  !important;
+}
+
+.greenClass {
+    background-color: #5cb85c !important;
+}
+a { color: inherit; }
+li {
+    display: inline;
+}
+</style>
+
+<body>
+
+    <header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><strong>Babet</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" id="myTab" role="tablist">
+
+
+    <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#tabs-1">BÜLTEN</a></li>
+    <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#tabs-2">CANLI</a></li>
+    <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#tabs-3">MAÇ SONUÇLARI</a></li>
+    <li class="nav-item"><a role="tab" data-toggle="tab" class="nav-link" href="#loading" style="display:none;">Loading</a></li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+</header>
+
+    <div class="limiter">
+        <div class="container-fluid">
+                  <div class="row">
+                  <br>
+</div>
+          <div class="row">
+
+
+  <div class="col-md-9">
+
+<div class="tab-content" role="tabpanel">
+
+
+
+    <div id="loading"  class="tab-pane fade show active">
+<center>
+Yükleniyor...<br>
+<div class="spinner-border text-success" style="width: 5rem; height: 5rem;" role="status">
+  <span class="sr-only">Yükleniyor...</span>
+</div>
+</center>
+</div>
+    <div id="tabs-1"  class="tab-pane fade container-fluid">
+
+            <table class="table table-hover " id="tableRegister" width="%100">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Lig</th>
+                        <th scope="col">Hafta</th>
+                        <th class="all" scope="col">Takımlar</th>
+                        <th class="all" scope="col">Tarih</th>
+                        <th scope="col">Bet</th>
+                        <th scope="col">Kod</th>
+                        <th scope="col">Şans</th>
+                        <th scope="col">Oran</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+                <tfoot class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Lig</th>
+                        <th scope="col">Hafta</th>
+                        <th class="all" scope="col">Takımlar</th>
+                        <th class="all" scope="col">Tarih</th>
+                        <th scope="col">Bet</th>
+                        <th scope="col">Kod</th>
+                        <th scope="col">Şans</th>
+                        <th scope="col">Oran</th>
+                    </tr>
+                </tfoot >
+            </table>
+     </div>
+    <div id="tabs-2"  class="tab-pane fade">
+
+    <table class="table table-hover " id="tableRegister3" width="%100">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th class="all" scope="col">Lig</th>
+                        <th class="not-mobile" scope="col">Hafta</th>
+                        <th class="all" scope="col">Takımlar</th>
+                        <th class="not-mobile" scope="col">Tarih</th>
+                        <th class="all" scope="col">Bet</th>
+                        <th class="not-mobile"  scope="col">Kod</th>
+                        <th class="not-mobile"  scope="col">Şans</th>
+                        <th class="not-mobile"  scope="col">Oran</th>
+                        <th class="all" scope="col">Skor</th>
+                        <th scope="col">Sonuç</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+                <tfoot class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th class="all" scope="col">Lig</th>
+                        <th class="not-mobile" scope="col">Hafta</th>
+                        <th class="all" scope="col">Takımlar</th>
+                        <th class="not-mobile" scope="col">Tarih</th>
+                        <th class="all" scope="col">Bet</th>
+                        <th class="not-mobile"  scope="col">Kod</th>
+                        <th class="not-mobile"  scope="col">Şans</th>
+                        <th class="not-mobile"  scope="col">Oran</th>
+                        <th class="all" scope="col">Skor</th>
+                        <th scope="col">Sonuç</th>
+                    </tr>
+                </tfoot>
+            </table>
+  </div>
+    <div id="tabs-3"  class="tab-pane fade">
+    <center>
+        <button type="button" class="btn btn-success">Başarı Oranı = %<span id="failed"></span></button>
+        </center>
+    <table class="table table-hover " id="tableRegister2" width="%100">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th class="not-mobile" scope="col">Lig</th>
+                        <th class="not-mobile" scope="col">Hafta</th>
+                        <th scope="col">Takımlar</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Bet</th>
+                        <th class="not-mobile" scope="col">Şans</th>
+                        <th class="not-mobile" scope="col">Oran</th>
+                        <th scope="col">Skor</th>
+                        <th scope="col">Sonuç</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+                <tfoot class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th class="not-mobile" scope="col">Lig</th>
+                        <th class="not-mobile" scope="col">Hafta</th>
+                        <th scope="col">Takımlar</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">Bet</th>
+                        <th class="not-mobile" scope="col">Şans</th>
+                        <th class="not-mobile" scope="col">Oran</th>
+                        <th scope="col">Skor</th>
+                        <th scope="col">Sonuç</th>
+                    </tr>
+                </tfoot>
+            </table>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+<div class="col-md-3">
+
+        <div class="betCoupon" id="basketCoupon" >
+            <div class="couponTop" style="border-top-left-radius:8px;border-top-right-radius:8px;">
+                <span class="couponTitle">İDDAA KUPONUM</span>
+                <span id="macsayisi" class="numberOfEvents">0</span>
+            </div>
+            <div class="couponContainer" >
+
+            <div class="nullCoupon" id="nullcoupon">
+                <div class="visible-xs">
+                    <i class="ni ni-iddaa"><img style="height: 105px; width: 85px;" src="http://c11.incisozluk.com.tr/res/incisozluk/11003/6/463076_o9304.jpg"></img></i>
+                    <p>Kuponunuzda maç bulunmamaktadır</p>
+                </div>
+            </div>
+
+                <div class="eventsContainer" id="kuponbilgileri" style="display: none;"></div>
+
+                <span class="clearfix"></span>
+                <div class="couponFooter" id="kuponbilgileritaban" style="display: none;">
+                    <div class="sysContainer">
+                        <div class="sysTop">
+                            <p class="sysTitle">Kasa Tutarı</p>
+                        </div>
+                        <div class="sysCenter">
+                            <input maxlength="6" class="kasa form-control" type="tel" id="kasabilgi" placeholder="Kasa tutarı girin" />
+                        </div>
+                    </div>
+
+                    <div class="detailRow mobilStretch">
+                        <div class="left">
+                            <div class="toddRow" style="display: block;">
+                                <div data-toggle="tooltip" class="caption" data-original-title="">Maks. Oran</div>
+                                <b id="oddproduct" data-toggle="tooltip" class="totalOdd bold" data-original-title="">0.00</b>
+                            </div>
+                        </div>
+                           <div class="left">
+                            <div class="toddRow" style="display: block;">
+                                <div data-toggle="tooltip" class="caption" data-original-title="">Tutma Şansı</div>
+                                <b id="analysisproduct" data-toggle="tooltip" class="totalOdd bold" data-original-title="">%0</b>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="couponAmount">
+                                <div class="caption" id="divMultiplierDesc"> Kupon Tutarı</div>
+                                <div class="coupon-multiply-select customSelectWrapper">
+                                            <b class="totalOdd bold" id="kellyproduct">0 TL</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="clearfix"></span>
+
+
+                    <div class="detailRow totalGainRow" style="display: block;">
+                        <div class="left">
+                            <div data-toggle="tooltip" class="caption" data-original-title="">Maks. Kazanç</div>
+                        </div>
+                        <div class="right">
+                            <b id="winamount" data-toggle="tooltip" class="totalGain" data-original-title="">0.00 TL</b>
+                        </div>
+                    </div>
+
+                    <span class="clearfix"></span>
+
+
+                </div>
+            </div>
+        </div>
+
+
+</div>
+
+        </div>
+        </div>
+    </div>
+
+
+    <!--===============================================================================================-->
+    <!-- Modal -->
+
+<!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Social buttons -->
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1">
+          <i class="fab fa-facebook-f"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1">
+          <i class="fab fa-twitter"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1">
+          <i class="fab fa-google-plus-g"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1">
+          <i class="fab fa-linkedin-in"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-dribbble mx-1">
+          <i class="fab fa-dribbble"> </i>
+        </a>
+      </li>
+    </ul>
+    <!-- Social buttons -->
+
+  </div>
+  <!-- Footer Elements -->
+  <span id="kuponyap" style="display:none;" ></span>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright  <a href="https://babet.metu.fun"> Babet</a> | Son Güncelleme: <b><font color="maroon" id="lastupdate"></font></b>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</body>
+
+</html>
