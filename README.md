@@ -28,7 +28,7 @@ Let's say probability of having ending match score as x-y is $$P(S=x.y)$$
 
 For example:
 probability of having **0-0** score at the end of the match is 
-- $$P(S=0.0)=P(G_A=0)*P(G_B=0)$$
+- $P(S=0.0)=P(G_A=0)*P(G_B=0)$
 
 After all possible ending scores are calculated, Bet prediction process is started.
 $$P(b)$$ refers to probability of bet ***'b'*** will occur and calculated as follows
